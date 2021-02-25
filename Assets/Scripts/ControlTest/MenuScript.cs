@@ -17,7 +17,7 @@ public class MenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         waitingForKey = false;
         setText();
     }
@@ -43,7 +43,7 @@ public class MenuScript : MonoBehaviour
 
     public void changeKey(string keyName)
     {
-        if (!waitingForKey) StartCoroutine(AssignedKey(keyName));
+        if (!waitingForKey) StartCoroutine(AssignKey(keyName));
     }
 
     public void setText()
@@ -59,5 +59,22 @@ public class MenuScript : MonoBehaviour
     IEnumerator WaitForKey()
     {
 
+        while (!keyEvent.isKey)
+        {
+            yield return null;
+        }
+    }
+
+    public IEnumerator AssignKey(string keyName)
+    { 
+        waitingForKey = true;
+        yield return WaitForKey();
+        if (newKey != KeyCode.P)
+        {
+            ControllerInput.self.setKey(keyName, newKey.ToString());
+            setText();
+        }
+
+        yield return null;
     }
 }

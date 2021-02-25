@@ -28,7 +28,8 @@ public class ControllerInput : MonoBehaviour
         } else if(this != self ){
             Destroy(gameObject);
         }
-        
+        //Comment this line if you want save preferances
+        PlayerPrefs.DeleteAll();        
         keys[actions.jumpedKey] = setKey(actions.jumpedKey, "Space");
         keys[actions.forwardKey] = setKey(actions.forwardKey, "W");
         keys[actions.backwardKey] = setKey(actions.backwardKey, "S");
@@ -41,6 +42,11 @@ public class ControllerInput : MonoBehaviour
     private KeyCode setKey(actions actionName, string keyName)
     {
         return (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(actionName.ToString(), keyName));
+    }
+
+    private void saveKey(actions actionName, string keyName)
+    {
+        PlayerPrefs.SetString(actionName.ToString(), keyName);
     }
 
     public  actions getAction(string name)
@@ -67,5 +73,12 @@ public class ControllerInput : MonoBehaviour
     public KeyCode getKey(string name)
     {
         return keys[getAction(name)];
+    }
+    
+    public void setKey(string name, string newKey)
+    {
+        actions actionName = getAction(name);
+        saveKey(actionName, newKey);
+        keys[actionName] = setKey(actionName, newKey);
     }
 }
