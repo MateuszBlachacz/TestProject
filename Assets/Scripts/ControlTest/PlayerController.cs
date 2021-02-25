@@ -18,19 +18,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(ControllerInput.self.forward))
+        if (Input.GetKey(ControllerInput.self.keys[actions.forwardKey]))
         {
             rb.AddForce(Vector3.forward * Time.deltaTime * speed);
-        } else if (Input.GetKey(ControllerInput.self.backward))
+        } else if (Input.GetKey(ControllerInput.self.keys[actions.backwardKey]))
         {
             rb.AddForce(Vector3.back * Time.deltaTime * speed);
-        } else if (Input.GetKey(ControllerInput.self.left))
+        } else if (Input.GetKey(ControllerInput.self.keys[actions.leftKey]))
         {
             rb.AddForce(Vector3.left * Time.deltaTime * speed);
-        } else if (Input.GetKey(ControllerInput.self.right))
+        } else if (Input.GetKey(ControllerInput.self.keys[actions.rightKey]))
         {
             rb.AddForce(Vector3.right * Time.deltaTime * speed);
-        } else if (Input.GetKeyDown(ControllerInput.self.jump))
+        } else if (Input.GetKeyDown(ControllerInput.self.keys[actions.jumpedKey]))
         {
             rb.AddForce(Vector3.up * Time.deltaTime * jumpForce);
         }
